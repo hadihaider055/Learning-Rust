@@ -38,6 +38,6 @@ fn main() {
     // * Print out the User struct if found, or a "not found" message if not
     match new_user {
         Some(new_user) => println!("{:?}", new_user),
-        _ => println!("not found!"),
+        _ => println!("User not found!"),
     }
 }
