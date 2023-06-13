@@ -29,7 +29,7 @@
 // * A vector is the easiest way to store the bills at stage 1, but a
 //   hashmap will be easier to work with at stages 2 and 3.
 
-use std::io;
+use std::{collections::HashMap, hash::Hash, io};
 
 #[derive(Debug, Clone)]
 pub struct Bill {
@@ -38,20 +38,26 @@ pub struct Bill {
 }
 
 pub struct Bills {
-    inner: Vec<Bill>,
+    inner: HashMap<String, Bill>,
 }
 
 impl Bills {
     fn new() -> Self {
-        Self { inner: vec![] }
+        Self {
+            inner: HashMap::new(),
+        }
     }
 
     fn add(&mut self, bill: Bill) {
-        self.inner.push(bill);
+        self.inner.insert(bill.name.to_string(), bill);
     }
 
     fn get_all(&self) -> Vec<&Bill> {
-        self.inner.iter().collect()
+        self.inner.values().collect()
+    }
+
+    fn remove(&mut self, name: &str) -> bool {
+        self.inner.remove(name).is_some()
     }
 }
 
@@ -109,6 +115,8 @@ mod menu {
         };
 
         let bill = Bill { name, amount };
+        bills.add(bill);
+        println!("Bill added");
     }
 
     pub fn view_bills(bills: &Bills) {
@@ -116,11 +124,31 @@ mod menu {
             println!("{:?}", bill);
         }
     }
+
+    pub fn remove_bill(bills: &mut Bills) {
+        for bill in bills.get_all() {
+            println!("{:?}", bill);
+        }
+
+        println!("Enter bill name to remove:");
+
+        let name = match get_input() {
+            Some(name) => name,
+            None => return,
+        };
+
+        if bills.remove(&name) {
+            println!("bill removed");
+        } else {
+            println!("bill not found");
+        }
+    }
 }
 
 enum MainMenu {
     AddBill,
     ViewBills,
+    RemoveBill,
 }
 
 impl MainMenu {
@@ -128,6 +156,7 @@ impl MainMenu {
         println!("");
         println!("1. Add Bill");
         println!("2. View Bills");
+        println!("3. View Bills");
         println!("Enter selection: ");
     }
 
@@ -135,6 +164,7 @@ impl MainMenu {
         match input {
             "1" => Some(MainMenu::AddBill),
             "2" => Some(MainMenu::ViewBills),
+            "3" => Some(MainMenu::RemoveBill),
             _ => None,
         }
     }
@@ -151,6 +181,7 @@ fn main() {
         match MainMenu::from_str(input.as_str()) {
             Some(MainMenu::AddBill) => menu::add_bill(&mut bills),
             Some(MainMenu::ViewBills) => menu::view_bills(&bills),
+            Some(MainMenu::RemoveBill) => menu::remove_bill(&mut bills),
             _ => return,
         }
     }
