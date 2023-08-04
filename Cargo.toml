@@ -11,3 +11,4 @@ path = "src/a26clib.rs"
 
 [dependencies]
 chrono = "0.4.25"
+thiserror = "1.0.44"
