@@ -68,7 +68,7 @@ fn main() {
 
 // METHOD # 2
 // #[derive(Debug)]
-// struct Luggage<State> {
+// struct Luggage<State> { 
 //     tracking_id: String,
 //     state: State,
 // }
