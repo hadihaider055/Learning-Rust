@@ -1,7 +1,7 @@
 use crate::domain::clip::ClipError;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Content(String);
 
 impl Content {

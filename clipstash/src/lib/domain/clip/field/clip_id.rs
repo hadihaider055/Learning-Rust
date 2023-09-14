@@ -2,7 +2,7 @@ use crate::data::DbId;
 use derive_more::Constructor;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Constructor)]
+#[derive(Debug, Clone, Constructor, Serialize, Deserialize)]
 pub struct ClipId(DbId);
 
 impl ClipId {

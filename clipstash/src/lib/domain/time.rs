@@ -3,7 +3,7 @@ use derive_more::From;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 
-#[derive(Debug, Clone, From)]
+#[derive(Debug, Clone, From, Serialize, Deserialize)]
 pub struct Time(DateTime<Utc>);
 
 impl Time {

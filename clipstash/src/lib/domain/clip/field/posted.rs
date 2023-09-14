@@ -1,9 +1,8 @@
-use super::ClipError;
-use crate::domain::Time;
+use crate::domain::time::Time;
 use derive_more::Constructor;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Constructor)]
+#[derive(Debug, Clone, Constructor, Serialize, Deserialize)]
 pub struct Posted(Time);
 
 impl Posted {

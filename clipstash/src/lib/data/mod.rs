@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use uuid::Uuid;
 
-#[derive(Debug, Clone, From, Display)]
+#[derive(Debug, Clone, From, Display, Serialize, Deserialize)]
 pub struct DbId(Uuid);
 
 impl DbId {
