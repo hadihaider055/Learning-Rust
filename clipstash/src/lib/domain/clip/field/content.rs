@@ -1,7 +1,7 @@
 use crate::domain::clip::ClipError;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, Deserialize , Serialize)]
+#[derive(Clone, Debug)]
 pub struct Content(String);
 
 impl Content {
@@ -14,12 +14,11 @@ impl Content {
     }
 
     // This is used to convert the Content(String) to a inner string
-    pub into_inner(self) -> String {
+    pub fn into_inner(self) -> String {
         self.0
     }
 
-    pub as_str(&self) -> &str{
+    pub fn as_str(&self) -> &str {
         self.0.as_str()
     }
-    
 }
