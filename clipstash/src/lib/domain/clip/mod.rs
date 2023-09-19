@@ -1,5 +1,6 @@
 pub mod field;
 
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -20,7 +21,7 @@ pub enum ClipError {
     Hits(#[from] std::num::TryFromIntError),
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Clip {
     pub clip_id: field::ClipId,
     pub shortcode: field::ShortCode,
