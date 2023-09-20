@@ -19,3 +19,4 @@ derive_more = "0.99"
 rand = "0.8"
 sqlx = {version = "0.7.1", features = ["sqlite",  "chrono"]}
 handlebars = {version = "4", features = ["dir_source"]}
+rocket = {version = "0.5.0-rc.1", features = ["json"]}
